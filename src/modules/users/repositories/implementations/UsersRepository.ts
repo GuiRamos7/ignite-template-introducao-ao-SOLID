@@ -45,7 +45,15 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const newUser = this.users.find((el) => el.id === receivedUser.id);
+    const arrayOfUserWithoutReceived = this.users.filter(
+      (el) => el.id !== receivedUser.id
+    );
+
+    Object.assign(newUser, { admin: true });
+    this.users = arrayOfUserWithoutReceived;
+
+    return newUser;
   }
 
   list(): User[] {
