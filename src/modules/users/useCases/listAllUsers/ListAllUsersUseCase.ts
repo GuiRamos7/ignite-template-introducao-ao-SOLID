@@ -9,9 +9,7 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User[] {
-    console.log('user_id', user_id);
     const user = this.usersRepository.findById(user_id);
-    console.log(user);
 
     if (!user) {
       throw new Error('User not exists');
