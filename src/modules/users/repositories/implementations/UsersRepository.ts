@@ -41,7 +41,9 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByEmail(email: string): User | undefined {
-    // Complete aqui
+    const user = this.users.find((el) => el.email === email);
+
+    return user;
   }
 
   turnAdmin(receivedUser: User): User {
@@ -51,7 +53,7 @@ class UsersRepository implements IUsersRepository {
     );
 
     Object.assign(newUser, { admin: true });
-    this.users = arrayOfUserWithoutReceived;
+    this.users = [...arrayOfUserWithoutReceived, newUser];
 
     return newUser;
   }
