@@ -6,11 +6,18 @@ class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    const { email, name } = request.body;
+    try {
+      const { email, name } = request.body;
 
-    const user = this.createUserUseCase.execute({ name, email });
+      const user = this.createUserUseCase.execute({ name, email });
 
-    return response.status(201).send(user);
+      if (user) {
+        return response.status(201).send(user);
+      }
+    } catch (error) {
+      console.log(error);
+      return response.status(400).send({ error: error.message });
+    }
   }
 }
 

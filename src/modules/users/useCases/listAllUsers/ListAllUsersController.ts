@@ -12,6 +12,10 @@ class ListAllUsersController {
       user_id,
     });
 
+    if (!users) {
+      return response.status(404);
+    }
+
     return response.status(200).send(users);
   }
 }
