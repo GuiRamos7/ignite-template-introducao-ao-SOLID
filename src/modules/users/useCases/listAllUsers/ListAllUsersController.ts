@@ -5,8 +5,12 @@ import { ListAllUsersUseCase } from './ListAllUsersUseCase';
 class ListAllUsersController {
   constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
 
-  handle(_: Request, response: Response): Response {
-    const users = this.listAllUsersUseCase.execute({ user_id: '' });
+  handle(request: Request, response: Response): Response {
+    const userId = request.headers.user_id;
+
+    const users = this.listAllUsersUseCase.execute({
+      user_id: userId,
+    });
 
     return response.status(200).send(users);
   }
