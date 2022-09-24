@@ -10,9 +10,16 @@ class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ email, name }: IRequest): User {
-    const user = this.usersRepository.create({ name, email });
+    const emailExists = this.usersRepository.findByEmail(email);
 
-    return user;
+    console.log(emailExists);
+
+    if (!emailExists) {
+      const user = this.usersRepository.create({ name, email });
+      return user;
+    }
+
+    throw new Error('Email already taken');
   }
 }
 
