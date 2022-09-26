@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Users Add Documentation",
+    "description": "This is an API Users",
+    "version": "1.0.0",
+    "contact": {
+      "email": "guioliveiraramos10@gmail.com"
+    }
+  },
+
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" }
+                },
+                "example": {
+                  "name": "Users name sample",
+                  "description": "email@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Email already taken"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "List users",
+        "description": "To list all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "Add user id",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
+}
